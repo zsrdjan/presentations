@@ -1,0 +1,10 @@
+{
+	"resourceGroup": "presentations",
+	"appServicePlan": "Demo",
+	"createPlanAndResourceGroup": true,
+	"location": "westeurope",
+	"planSku": "F1",
+	"webAppName": "crafters-cloud-key-vault-demo",
+	"createKeyVault": true,
+	"keyVault": "cc-keyvault-demo"
+}
