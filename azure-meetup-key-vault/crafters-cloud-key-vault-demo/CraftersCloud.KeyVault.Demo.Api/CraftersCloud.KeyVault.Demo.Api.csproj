@@ -9,10 +9,13 @@
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
+    <UserSecretsId>31d655b7-7105-4a50-86a4-2fe8ee7d1e2d</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/e1201ffb-e34e-4dc6-a527-434abde01ee5/resourceGroups/presentations/providers/microsoft.insights/components/crafters-cloud-key-vault-demo</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.14.0" />
+    <PackageReference Include="Microsoft.AspNetCore.AzureKeyVault.HostingStartup" Version="2.0.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.5" />
   </ItemGroup>
 
