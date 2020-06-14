@@ -6,16 +6,37 @@ using NUnit.Framework;
 
 namespace CraftersCloud.KeyVault.Demo.Api.Tests
 {
-    [Category("integration")]
-    public class SecretsControllerFixture : IntegrationFixtureBase
+    public static class SecretsControllerFixtureContext
     {
-        [Test]
-        public async Task TestGetSecrets()
+        [Category("integration")]
+        public class SecretsControllerFixtureGivenKeyVaultIsDisabled : IntegrationFixtureBase
         {
-            var secrets = await Client.GetAsync<GetSecrets.Response>("secrets");
+            [Test]
+            public async Task TestGetSecrets()
+            {
+                var secrets = await Client.GetAsync<GetSecrets.Response>("secrets");
 
-            secrets.SampleKeyVaultSecret.Should().Be("Value1FromInMemoryConfiguration");
-            secrets.GitHubApiSuperSecretKey.Should().Be("Value2FromInMemoryConfiguration");
+                secrets.SampleKeyVaultSecret.Should().Be("Value1FromInMemoryConfiguration");
+                secrets.GitHubApiSuperSecretKey.Should().Be("Value2FromInMemoryConfiguration");
+            }
+        }
+
+        [Category("integration")]
+        public class SecretsControllerFixtureGivenKeyVaultIsEnabled : IntegrationFixtureBase
+        {
+            public SecretsControllerFixtureGivenKeyVaultIsEnabled()
+            {
+                EnableKeyVault();
+            }
+
+            [Test]
+            public async Task TestGetSecrets()
+            {
+                var secrets = await Client.GetAsync<GetSecrets.Response>("secrets");
+
+                secrets.SampleKeyVaultSecret.Should().Be("I am secret coming from keyvault");
+                secrets.GitHubApiSuperSecretKey.Should().Be("I am GitHubApi secret coming from keyvault");
+            }
         }
     }
 }

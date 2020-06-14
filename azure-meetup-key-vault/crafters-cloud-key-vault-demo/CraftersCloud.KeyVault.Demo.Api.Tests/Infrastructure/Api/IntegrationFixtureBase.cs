@@ -15,11 +15,13 @@ namespace CraftersCloud.KeyVault.Demo.Api.Tests.Infrastructure.Api
         private TestServer _server = null!;
         private IServiceScope _testScope = null!;
         protected HttpClient Client = null!;
+        private bool _keyVaultEnabled;
 
         [SetUp]
         protected void Setup()
         {
             _configuration = new TestConfigurationBuilder()
+                .WithKeyVaultEnabled(_keyVaultEnabled)
                 .Build();
 
             IWebHostBuilder webHostBuilder = new WebHostBuilder()
@@ -30,6 +32,11 @@ namespace CraftersCloud.KeyVault.Demo.Api.Tests.Infrastructure.Api
             _server = new TestServer(webHostBuilder);
             Client = _server.CreateClient();
             _testScope = CreateScope();
+        }
+
+        protected void EnableKeyVault()
+        {
+            _keyVaultEnabled = true;
         }
 
         private IServiceScope CreateScope()
